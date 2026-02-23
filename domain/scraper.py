@@ -11,7 +11,7 @@ class PropertyScraper:
             'Type of property': None,
             'Subtype of property': None,
             'Price': None,
-            'Type of sale': None,
+            'Type of sale': "Normal sale",
             'Number of rooms': None,
             'Living Area': None,
             'Terrace Area': None,
@@ -42,6 +42,7 @@ class PropertyScraper:
         self.extract_property_subtype()
         self.extract_property_type(self.data['Subtype of property'])
         self.extract_price()
+        self.extract_sale_type()
         print("Scraping completed.")
 
 
@@ -82,15 +83,44 @@ class PropertyScraper:
         if elem:
             text = elem.get_text(strip=True)
             clean_text = re.sub(r'[^\d]', '', text)
-            self.data['Price'] = int(clean_text)
+            if clean_text:
+                self.data['Price'] = int(clean_text)
+            else:
+                self.data['Price'] = "None"
             print(f"  Found price: {self.data['Price']}")
 
+    def extract_sale_type(self):
+        financial = self.soup.find('div', class_='financial')
+
+        list_items = financial.find_all('li')
+    
+        # Life sale indicators (if ANY of these exist, it's a life sale)
+        life_sale_indicators = [
+            'monthly annuity',
+            'number of sellers',
+            'indexed pension',
+            'maximal duration of annuity',
+            'age 1st annuitant',
+            'age 2nd annuitant',
+        ]
+    
+
+        for li in list_items:
+            li_text = li.get_text(strip=True).lower()
+            
+            for indicator in life_sale_indicators:
+                if indicator in li_text:
+                    self.data['Type of sale'] = 'Life sale'
+                    break
 
 
 
 
-url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+
+# url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+# url = "https://immovlan.be/en/detail/residence/for-sale/1180/ukkel/vbd21625"
 # url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
+url = "https://immovlan.be/en/detail/apartment/for-sale/1080/sint-jans-molenbeek/vbd65143"
 scraper = PropertyScraper(url)
 
 # Print the result
@@ -98,3 +128,4 @@ print(f"Data locality: {scraper.data['Locality']}")
 print(f"Data property subtype: {scraper.data['Subtype of property']}")
 print(f"Data property type: {scraper.data['Type of property']}")
 print(f"Data price: {scraper.data['Price']}")
+print(f"Data sale type: {scraper.data['Type of sale']}")
