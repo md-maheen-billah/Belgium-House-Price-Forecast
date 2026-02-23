@@ -41,6 +41,7 @@ class PropertyScraper:
         self.extract_locality()
         self.extract_property_subtype()
         self.extract_property_type(self.data['Subtype of property'])
+        self.extract_price()
         print("Scraping completed.")
 
 
@@ -76,15 +77,24 @@ class PropertyScraper:
         else:
             self.data['Type of property'] = "unknown"
 
+    def extract_price(self):
+        elem = self.soup.select_one('span.detail__header_price_data')
+        if elem:
+            text = elem.get_text(strip=True)
+            clean_text = re.sub(r'[^\d]', '', text)
+            self.data['Price'] = int(clean_text)
+            print(f"  Found price: {self.data['Price']}")
 
 
 
 
-# url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
-url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
+
+url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+# url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
 scraper = PropertyScraper(url)
 
 # Print the result
 print(f"Data locality: {scraper.data['Locality']}")
 print(f"Data property subtype: {scraper.data['Subtype of property']}")
 print(f"Data property type: {scraper.data['Type of property']}")
+print(f"Data price: {scraper.data['Price']}")
