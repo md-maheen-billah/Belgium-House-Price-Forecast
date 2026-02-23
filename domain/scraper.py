@@ -39,6 +39,7 @@ class PropertyScraper:
         response = requests.get(self.url, headers=headers)
         self.soup = BeautifulSoup(response.text, 'html.parser')
         self.extract_locality()
+        self.extract_property_type()
         print("Scraping completed.")
 
     def extract_locality(self):
@@ -50,6 +51,12 @@ class PropertyScraper:
                 self.data['Locality'] = cleaned_text
                 print(f"  Found locality: {self.data['Locality']}")
 
+    def extract_property_type(self):
+        match = re.search(r'/detail/([^/]+)/', self.url)
+        if match:
+                self.data['Type of property'] = match.group(1)
+                print(f"  Found property type from URL: {self.data['Type of property']}")
+
 
 
 
@@ -57,4 +64,5 @@ url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962
 scraper = PropertyScraper(url)
 
 # Print the result
-print(f"Data dictionary: {scraper.data}")
+print(f"Data locality: {scraper.data['Locality']}")
+print(f"Data property type: {scraper.data['Type of property']}")
