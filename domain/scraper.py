@@ -44,6 +44,7 @@ class PropertyScraper:
         self.extract_price()
         self.extract_sale_type()
         self.extract_number_of_rooms()
+        self.extract_living_area()
         print("Scraping completed.")
 
 
@@ -116,22 +117,35 @@ class PropertyScraper:
                     break
 
     def extract_number_of_rooms(self):
-        elem = self.soup.select_one('div.data-row-wrapper:has(h4:contains("Number of bedrooms")) p')
-        if elem:
-            raw_text = elem.get_text(strip=True)
-            print(f"  Raw number of rooms text: '{raw_text}'")
-            clean_text = re.sub(r'[^\d]', '', raw_text)
-            if clean_text:
-                self.data['Number of rooms'] = int(clean_text)
-            else:
-                self.data['Number of rooms'] = "None"
-            print(f"  Found number of rooms: {self.data['Number of rooms']}")
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "Number of bedrooms" in title.get_text():
+                value = row.select_one("p")
+                raw_text = value.get_text(strip=True)
+                clean_text = re.sub(r'[^\d]', '', raw_text)
+                self.data["Number of rooms"] = int(clean_text) if clean_text else None
+                print(f"Found number of rooms: {self.data['Number of rooms']}")
+
+
+    def extract_living_area(self):
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "Livable surface" in title.get_text():
+                value = row.select_one("p")
+                raw_text = value.get_text(strip=True)
+                print(f"Raw living area text: '{raw_text}'")
+                clean_text = re.sub(r'[^\d]', '', raw_text)
+                self.data["Living Area"] = int(clean_text) if clean_text else None
+                print(f"Found living area: {self.data['Living Area']}")
 
 
 
-
-# url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
-url = "https://immovlan.be/en/detail/residence/for-sale/1180/ukkel/vbd21625"
+url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+# url = "https://immovlan.be/en/detail/residence/for-sale/1180/ukkel/vbd21625"
 # url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
 # url = "https://immovlan.be/en/detail/apartment/for-sale/1080/sint-jans-molenbeek/vbd65143"
 scraper = PropertyScraper(url)
@@ -143,3 +157,4 @@ print(f"Data property type: {scraper.data['Type of property']}")
 print(f"Data price: {scraper.data['Price']}")
 print(f"Data sale type: {scraper.data['Type of sale']}")
 print(f"Data number of rooms: {scraper.data['Number of rooms']}")
+print(f"Data living area: {scraper.data['Living Area']}")
