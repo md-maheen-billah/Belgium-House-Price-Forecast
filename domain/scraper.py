@@ -39,30 +39,52 @@ class PropertyScraper:
         response = requests.get(self.url, headers=headers)
         self.soup = BeautifulSoup(response.text, 'html.parser')
         self.extract_locality()
-        self.extract_property_type()
+        self.extract_property_subtype()
+        self.extract_property_type(self.data['Subtype of property'])
         print("Scraping completed.")
 
-    def extract_locality(self):
-            elem = self.soup.select_one('span.detail__header_title_main span.d-none.d-lg-inline')
-    
-            if elem:
-                raw_text = elem.get_text(strip=True)
-                cleaned_text = re.sub(r'^-\s+', '', raw_text)
-                self.data['Locality'] = cleaned_text
-                print(f"  Found locality: {self.data['Locality']}")
 
-    def extract_property_type(self):
+    def extract_locality(self):
+        elem = self.soup.select_one('span.detail__header_title_main span.d-none.d-lg-inline')
+        if elem:
+            raw_text = elem.get_text(strip=True)
+            cleaned_text = re.sub(r'^-\s+', '', raw_text)
+            self.data['Locality'] = cleaned_text
+            print(f"  Found locality: {self.data['Locality']}")
+
+    def extract_property_subtype(self):
         match = re.search(r'/detail/([^/]+)/', self.url)
         if match:
-                self.data['Type of property'] = match.group(1)
-                print(f"  Found property type from URL: {self.data['Type of property']}")
+                self.data['Subtype of property'] = match.group(1)
+                print(f"  Found property subtype from URL: {self.data['Subtype of property']}")
+
+    def extract_property_type(self, subtype):
+        house_subtypes = [
+        'residence', 'villa', 'bungalow', 'chalet', 'cottage',
+        'master-house', 'mansion', 'mixed-buildings', 'house'
+        ]
+    
+        apartment_subtypes = [
+        'apartment', 'ground-floor', 'penthouse', 'duplex',
+        'triplex', 'studio', 'loft'
+        ]
+
+        if subtype in house_subtypes:
+            self.data['Type of property'] = "house"
+        elif subtype in apartment_subtypes:
+            self.data['Type of property'] = "apartment"
+        else:
+            self.data['Type of property'] = "unknown"
 
 
 
 
-url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+
+# url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
+url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
 scraper = PropertyScraper(url)
 
 # Print the result
 print(f"Data locality: {scraper.data['Locality']}")
+print(f"Data property subtype: {scraper.data['Subtype of property']}")
 print(f"Data property type: {scraper.data['Type of property']}")
