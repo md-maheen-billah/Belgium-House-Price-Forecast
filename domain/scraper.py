@@ -47,6 +47,7 @@ class PropertyScraper:
         self.extract_surface_of_the_land()
         self.extract_terrace()
         self.extract_garden()
+        self.extract_number_of_facades()
         print("Scraping completed.")
 
 
@@ -157,6 +158,19 @@ class PropertyScraper:
                 print(f"Found surface of the land: {self.data['Surface of the land']}")
 
 
+    def extract_number_of_facades(self):
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "Number of facades" in title.get_text():
+                value = row.select_one("p")
+                raw_text = value.get_text(strip=True)
+                clean_text = re.sub(r'[^\d]', '', raw_text)
+                self.data["Number of facades"] = int(clean_text) if clean_text else None
+                print(f"Found number of facades: {self.data['Number of facades']}")
+
+
     def extract_terrace(self):
         rows = self.soup.select("div.data-row-wrapper > div")
 
@@ -217,3 +231,4 @@ print(f"Data terrace: {scraper.data['Terrace']}")
 print(f"Data terrace area: {scraper.data['Terrace Area']}")
 print(f"Data garden: {scraper.data['Garden']}")
 print(f"Data garden area: {scraper.data['Garden Area']}")
+print(f"Data number of facades: {scraper.data['Number of facades']}")
