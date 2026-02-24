@@ -15,7 +15,58 @@ class PriceRanges():
         0 if range OK
         -1 if range too little
         """
-        pass
+
+        url = (
+        "https://immovlan.be/en/real-estate"
+        "?transactiontypes=for-sale"
+        "&propertytypes=house,apartment"
+        f"&minprice={minprice}"
+        f"&maxprice={maxprice}"
+        "&noindex=1"
+    )
+
+def get_results_count(minprice, maxprice):
+    url = (
+        "https://immovlan.be/en/real-estate"
+        "?transactiontypes=for-sale"
+        "&propertytypes=house,apartment"
+        f"&minprice={minprice}"
+        f"&maxprice={maxprice}"
+        "&noindex=1"
+    )
+
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    search_results = soup.find("section", id="search-results")
+    if not search_results:
+        return 0
+
+    results_div = search_results.find("div", class_="col-12 mb-2")
+    if not results_div:
+        return 0
+
+    text = results_div.get_text(" ", strip=True).lower()
+
+    match = re.search(r"(\d+)\s+results", text)
+    if match:
+        return int(match.group(1))
+
+    return 0
+
+tests = [
+    (1, 100000),
+    (100000, 200000),
+    (200000, 300000),
+]
+
+for minp, maxp in tests:
+    count = get_results_count(minp, maxp)
+    print(f"Test {minp} - {maxp} → {count} résultats")
+
+
+#_________________________________________________
+
 
     def adjust_range(self, min_max: list[int], increase: bool) -> list[int]:
         pass
@@ -35,6 +86,7 @@ class PriceRanges():
         """
         pass
 
+#_______________________________________________________
 def get_results_count(minprice, maxprice):
     # Construire l'URL avec les paramètres de prix
     url = (
