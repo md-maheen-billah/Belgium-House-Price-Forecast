@@ -79,7 +79,6 @@ https://immovlan.be/en/detail/residence/for-sale/7301/hornu/vbd86546
 https://immovlan.be/en/detail/residence/for-sale/5570/beauraing/vbd86457
 https://immovlan.be/en/detail/apartment/for-sale/4000/liege/vbd86396
 https://immovlan.be/en/detail/residence/for-sale/6200/bouffioulx/vbd86276
-https://immovlan.be/en/detail/apartment/for-sale/6040/jumet/vbd86181
 https://immovlan.be/en/detail/apartment/for-sale/4460/grace-hollogne/vbd86108
 https://immovlan.be/en/detail/residence/for-sale/6000/charleroi/vbd86088
 https://immovlan.be/en/detail/residence/for-sale/6043/ransart/vbd86070
@@ -923,3 +922,4 @@ https://immovlan.be/en/detail/apartment/for-sale/5650/walcourt/vbd69065
 https://immovlan.be/en/detail/villa/for-sale/8650/klerken/rwc40443
 https://immovlan.be/en/detail/apartment/for-sale/7603/bon-secours/vbd67965
 https://immovlan.be/en/detail/residence/for-sale/7080/la-bouverie/vbd67800
+https://immovlan.be/en/detail/apartment/for-sale/7603/bon-secours/vbd67719

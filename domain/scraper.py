@@ -51,6 +51,7 @@ class PropertyScraper:
         self.extract_state_of_the_building()
         self.extract_furnished()  
         self.extract_swimming_pool()
+        return self.data 
         print("Scraping completed.")
 
 
