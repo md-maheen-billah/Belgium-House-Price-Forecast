@@ -11,7 +11,12 @@ def update_links() -> list[str]:
     links_list = links.scrape()
     print("SCRAPED: OK")
     return links_list
-
+    
+price_ranges = [
+    {"minprice": 1, "maxprice": 100000, "amount": 943}
+    # {"minprice": 100001, "maxprice": 135000, "amount": 989},
+    # {"minprice": 135001, "maxprice": 150000, "amount": 867}
+]
 links = update_links()
 DataManager.links_export(links)
 # OR 
