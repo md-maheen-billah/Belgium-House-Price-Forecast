@@ -1,5 +1,6 @@
 from data.manager import DataManager
 from domain.links import Links
+from domain.scraper import PropertyScraper
 
 def update_ranges():
     pass
@@ -20,3 +21,10 @@ price_ranges = [
 # DataManager.links_export(links)
 # OR 
 links = DataManager.links_import()
+links = links[:50]
+print(links)
+data_list = []
+for link in links:
+    scraper = PropertyScraper(link)
+    data_list.append(scraper.scrape())
+print(data_list)

@@ -4,6 +4,10 @@ import re
 class PropertyScraper:
     def __init__(self, url):
         self.url = url
+        self.session = requests.Session()
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        })
         self.soup = None
         self.data = {
             # Non-boolean fields (default None)
@@ -30,10 +34,8 @@ class PropertyScraper:
 
     def scrape(self):
         print(f"Scraping data from {self.url}...")
-        headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-        response = requests.get(self.url, headers=headers)
+        response = self.session.get(self.url)
+        response.raise_for_status()
         self.soup = BeautifulSoup(response.text, 'html.parser')
         self.extract_locality()
         self.extract_property_subtype()
@@ -252,26 +254,26 @@ class PropertyScraper:
 # url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
 # url = "https://immovlan.be/en/detail/apartment/for-sale/1080/sint-jans-molenbeek/vbd65143"
 # url = "https://immovlan.be/en/detail/studio/for-sale/1000/brussels/vbd48521"
-url = "https://immovlan.be/en/detail/villa/for-sale/1170/watermaal-bosvoorde/vbd82581"
+# url = "https://immovlan.be/en/detail/villa/for-sale/1170/watermaal-bosvoorde/vbd82581"
 # url = "https://immovlan.be/en/detail/apartment/for-sale/8670/koksijde/rbv12584"
 # url = "https://immovlan.be/en/detail/apartment/for-sale/8370/blankenberge/rbu86234"
 
-scraper = PropertyScraper(url)
-# Print the result
-print(f"Data locality: {scraper.data['Locality']}")
-print(f"Data property subtype: {scraper.data['Subtype of property']}")
-print(f"Data property type: {scraper.data['Type of property']}")
-print(f"Data price: {scraper.data['Price']}")
-print(f"Data sale type: {scraper.data['Type of sale']}")
-print(f"Data number of rooms: {scraper.data['Number of rooms']}")
-print(f"Data living area: {scraper.data['Living Area']}")
-print(f"Data surface of the land: {scraper.data['Surface of the land']}")
-print(f"Data terrace: {scraper.data['Terrace']}")
-print(f"Data terrace area: {scraper.data['Terrace Area']}")
-print(f"Data garden: {scraper.data['Garden']}")
-print(f"Data garden area: {scraper.data['Garden Area']}")
-print(f"Data number of facades: {scraper.data['Number of facades']}")
-print(f"Data state of the building: {scraper.data['State of the building']}")   
-print(f"Data furnished: {scraper.data['Furnished']}")
-print(f"Data swimming pool: {scraper.data['Swimming pool']}")
-print(scraper.data)
+# scraper = PropertyScraper(url)
+# # Print the result
+# print(f"Data locality: {scraper.data['Locality']}")
+# print(f"Data property subtype: {scraper.data['Subtype of property']}")
+# print(f"Data property type: {scraper.data['Type of property']}")
+# print(f"Data price: {scraper.data['Price']}")
+# print(f"Data sale type: {scraper.data['Type of sale']}")
+# print(f"Data number of rooms: {scraper.data['Number of rooms']}")
+# print(f"Data living area: {scraper.data['Living Area']}")
+# print(f"Data surface of the land: {scraper.data['Surface of the land']}")
+# print(f"Data terrace: {scraper.data['Terrace']}")
+# print(f"Data terrace area: {scraper.data['Terrace Area']}")
+# print(f"Data garden: {scraper.data['Garden']}")
+# print(f"Data garden area: {scraper.data['Garden Area']}")
+# print(f"Data number of facades: {scraper.data['Number of facades']}")
+# print(f"Data state of the building: {scraper.data['State of the building']}")   
+# print(f"Data furnished: {scraper.data['Furnished']}")
+# print(f"Data swimming pool: {scraper.data['Swimming pool']}")
+# print(scraper.data)
