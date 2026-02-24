@@ -5,8 +5,8 @@ import re
 class PriceRanges():
 
     def init(self):
-        self._step = .1
         self.ranges = []
+        self._prev_adj = {"increase": True, "num": 50000} 
 
     def check_range(self, minprice: int, maxprice: int) -> int:
         """
@@ -17,13 +17,32 @@ class PriceRanges():
         """
         pass
 
-    def adjust_range(self, min_max: list[int], increase: bool) -> list[int]:
-        pass
+    def adjust_range(
+        self, min_max: dict[str: int], increase: bool) -> dict[str: int]:
+        if increase and self._prev_adj["increase"]:
+            self._prev_adj["num"] *= 2
+            min_max["maxprice"] += self._prev_adj["num"]
+        elif not increase and self._prev_adj["increase"]:
+            self._prev_adj["increase"] = False
+            self._prev_adj["num"] //= 2
+            min_max["maxprice"] -= self._prev_adj["num"]
+        elif increase and not self._prev_adj["increase"]:
+            self._prev_adj["increase"] = True
+            self._prev_adj["num"] //= 2
+            min_max["maxprice"] += self._prev_adj["num"]
+        elif not increase and not self._prev_adj["increase"]:
+            self._prev_adj["num"] *= 2
+            min_max["maxprice"] -= self._prev_adj["num"]
+        return min_max
 
-    def append_range(
-        self, minprice: int, maxprice: int, results_amount: int
-    ):
-        pass
+    def append_range(self, minprice: int, maxprice: int, results_amount: int):
+        self.ranges.append(
+            {
+                "minprice": minprice,
+                "maxprice": maxprice,
+                "results_amount": results_amount
+            }
+        )
 
     def fill_ranges():
         """
