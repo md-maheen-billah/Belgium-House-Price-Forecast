@@ -21,9 +21,7 @@ class PropertyScraper:
             'State of the building': None,
             
             # Boolean fields (default 0 = No)
-            'Fully equipped kitchen': 0,
             'Furnished': 0,
-            'Open fire': 0,
             'Terrace': 0,
             'Garden': 0,
             'Swimming pool': 0
@@ -48,6 +46,9 @@ class PropertyScraper:
         self.extract_terrace()
         self.extract_garden()
         self.extract_number_of_facades()
+        self.extract_state_of_the_building()
+        self.extract_furnished()  
+        self.extract_swimming_pool()
         print("Scraping completed.")
 
 
@@ -207,17 +208,55 @@ class PropertyScraper:
                 clean_text = re.sub(r'[^\d]', '', raw_text2)
                 self.data["Garden Area"] = int(clean_text) if clean_text else None
                 print(f"Found garden area: {self.data['Garden Area']}")
-#Terrace
+
+
+    def extract_state_of_the_building(self):
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "State of the property" in title.get_text():
+                value = row.select_one("p")
+                raw_text = value.get_text(strip=True)
+                self.data["State of the building"] = raw_text if raw_text else None
+                print(f"Found state of the building: {self.data['State of the building']}")
+
+
+    def extract_furnished(self):
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "Furnished" in title.get_text():
+                    value = row.select_one("p")
+                    raw_text = value.get_text(strip=True)
+                    if raw_text.lower() == "yes":
+                        self.data["Furnished"] = 1
+
+
+    def extract_swimming_pool(self):
+        rows = self.soup.select("div.data-row-wrapper > div")
+
+        for row in rows:
+            title = row.select_one("h4")
+            if title and "Swimming pool" in title.get_text():
+                    value = row.select_one("p")
+                    raw_text = value.get_text(strip=True)
+                    if raw_text.lower() == "yes":
+                        self.data["Swimming pool"] = 1
+
+
 
 # url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
 # url = "https://immovlan.be/en/detail/residence/for-sale/1180/ukkel/vbd21625"
 # url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
 # url = "https://immovlan.be/en/detail/apartment/for-sale/1080/sint-jans-molenbeek/vbd65143"
-url = "https://immovlan.be/en/detail/studio/for-sale/1000/brussels/vbd48521"
-# url = "https://immovlan.be/en/detail/villa/for-sale/1170/watermaal-bosvoorde/vbd82581"
+# url = "https://immovlan.be/en/detail/studio/for-sale/1000/brussels/vbd48521"
+url = "https://immovlan.be/en/detail/villa/for-sale/1170/watermaal-bosvoorde/vbd82581"
+# url = "https://immovlan.be/en/detail/apartment/for-sale/8670/koksijde/rbv12584"
+# url = "https://immovlan.be/en/detail/apartment/for-sale/8370/blankenberge/rbu86234"
 
 scraper = PropertyScraper(url)
-
 # Print the result
 print(f"Data locality: {scraper.data['Locality']}")
 print(f"Data property subtype: {scraper.data['Subtype of property']}")
@@ -232,3 +271,7 @@ print(f"Data terrace area: {scraper.data['Terrace Area']}")
 print(f"Data garden: {scraper.data['Garden']}")
 print(f"Data garden area: {scraper.data['Garden Area']}")
 print(f"Data number of facades: {scraper.data['Number of facades']}")
+print(f"Data state of the building: {scraper.data['State of the building']}")   
+print(f"Data furnished: {scraper.data['Furnished']}")
+print(f"Data swimming pool: {scraper.data['Swimming pool']}")
+print(scraper.data)
