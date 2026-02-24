@@ -9,6 +9,12 @@ class PriceRanges():
         self._prev_adj = {"increase": True, "num": 50000}
         self._absolute_max = 50000000
 
+    def get_last_range(self) -> int:
+        if self.ranges == []:
+            return 100000
+        else:
+            return self.ranges[-1]["maxprice"] - self.ranges[-1]["minprice"]
+
     def check_range(self, minprice: int, maxprice: int) -> int:
         """
         Returns:
