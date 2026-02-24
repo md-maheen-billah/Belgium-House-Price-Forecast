@@ -1,21 +1,39 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+
 class PriceRanges():
 
     def init(self):
         self._step = .1
+        self.ranges = []
 
-    def check_range(self, minprice: int, maxprice: int) -> bool:
+    def check_range(self, minprice: int, maxprice: int) -> int:
+        """
+        Returns:
+        1 if range too large
+        0 if range OK
+        -1 if range too little
+        """
         pass
 
     def adjust_range(self, min_max: list[int], increase: bool) -> list[int]:
-
-
-    def append_ranges(self, minprice: int, maxprice: int, results_amount: int):
         pass
 
+    def append_range(
+        self, minprice: int, maxprice: int, results_amount: int
+    ):
+        pass
 
-import requests
-from bs4 import BeautifulSoup
-import re
+    def fill_ranges():
+        """
+        Method creates all ranges from lowest price to highest
+        It creates range
+        checks it with check_range()
+        adjust_range() if needed
+        append_range when OK
+        """
+        pass
 
 def get_results_count(minprice, maxprice):
     # Construire l'URL avec les paramètres de prix
