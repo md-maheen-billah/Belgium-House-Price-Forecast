@@ -31,7 +31,7 @@ class PriceRanges():
         It creates range
         checks it with check_range()
         adjust_range() if needed
-        append_range when OK
+        append_range when OK.
         """
         pass
 
