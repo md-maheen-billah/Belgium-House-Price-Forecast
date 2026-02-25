@@ -77,7 +77,7 @@ class PropertyScraper:
     def extract_property_type(self, subtype):
         house_subtypes = [
         'residence', 'villa', 'bungalow', 'chalet', 'cottage',
-        'master-house', 'mansion', 'mixed-buildings', 'house'
+        'master-house', 'mansion', 'mixed-building', 'house'
         ]
     
         apartment_subtypes = [
