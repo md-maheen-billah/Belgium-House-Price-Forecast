@@ -1,6 +1,10 @@
+from turtle import delay
+
 import requests
 from bs4 import BeautifulSoup
 import re
+import time
+import random
 
 class PropertyScraper:
     def __init__(self, url):
@@ -16,7 +20,6 @@ class PropertyScraper:
             'Type of property': None,
             'Subtype of property': None,
             'Price': None,
-            'Type of sale': "Normal sale",
             'Number of rooms': None,
             'Living Area': None,
             'Terrace Area': None,
@@ -31,10 +34,10 @@ class PropertyScraper:
             'Garden': 0,
             'Swimming pool': 0
         }
-        self.scrape()
 
     def scrape(self):
-        #print(f"Scraping data from {self.url}...")
+        delay = random.uniform(1, 2.5)
+        time.sleep(delay)
         response = self.session.get(self.url)
         response.raise_for_status()
         self.soup = BeautifulSoup(response.text, 'html.parser')
@@ -42,7 +45,6 @@ class PropertyScraper:
         self.extract_property_subtype()
         self.extract_property_type(self.data['Subtype of property'])
         self.extract_price()
-        self.extract_sale_type()
         self.extract_number_of_rooms()
         self.extract_living_area()
         self.extract_surface_of_the_land()
@@ -53,7 +55,6 @@ class PropertyScraper:
         self.extract_furnished()  
         self.extract_swimming_pool()
         return self.data 
-        #print("Scraping completed.")
 
 
     def extract_locality(self):
@@ -62,14 +63,13 @@ class PropertyScraper:
             raw_text = elem.get_text(strip=True)
             cleaned_text = re.sub(r'^-\s+', '', raw_text)
             self.data['Locality'] = cleaned_text
-            #print(f"  Found locality: {self.data['Locality']}")
 
 
     def extract_property_subtype(self):
         match = re.search(r'/detail/([^/]+)/', self.url)
         if match:
                 self.data['Subtype of property'] = match.group(1)
-                #print(f"  Found property subtype from URL: {self.data['Subtype of property']}")
+
 
     def extract_property_type(self, subtype):
         house_subtypes = [
@@ -98,31 +98,7 @@ class PropertyScraper:
                 self.data['Price'] = int(clean_text)
             else:
                 self.data['Price'] = "None"
-            #print(f"  Found price: {self.data['Price']}")
 
-    def extract_sale_type(self):
-        financial = self.soup.find('div', class_='financial')
-
-        list_items = financial.find_all('li')
-    
-        # Life sale indicators (if ANY of these exist, it's a life sale)
-        life_sale_indicators = [
-            'monthly annuity',
-            'number of sellers',
-            'indexed pension',
-            'maximal duration of annuity',
-            'age 1st annuitant',
-            'age 2nd annuitant',
-        ]
-    
-
-        for li in list_items:
-            li_text = li.get_text(strip=True).lower()
-            
-            for indicator in life_sale_indicators:
-                if indicator in li_text:
-                    self.data['Type of sale'] = 'Life sale'
-                    break
 
     def extract_number_of_rooms(self):
         rows = self.soup.select("div.data-row-wrapper > div")
@@ -134,7 +110,6 @@ class PropertyScraper:
                 raw_text = value.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text)
                 self.data["Number of rooms"] = int(clean_text) if clean_text else None
-                #print(f"Found number of rooms: {self.data['Number of rooms']}")
 
 
     def extract_living_area(self):
@@ -147,7 +122,6 @@ class PropertyScraper:
                 raw_text = value.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text)
                 self.data["Living Area"] = int(clean_text) if clean_text else None
-                #print(f"Found living area: {self.data['Living Area']}")
 
 
     def extract_surface_of_the_land(self):
@@ -160,7 +134,6 @@ class PropertyScraper:
                 raw_text = value.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text)
                 self.data["Surface of the land"] = int(clean_text) if clean_text else None
-                #print(f"Found surface of the land: {self.data['Surface of the land']}")
 
 
     def extract_number_of_facades(self):
@@ -173,7 +146,6 @@ class PropertyScraper:
                 raw_text = value.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text)
                 self.data["Number of facades"] = int(clean_text) if clean_text else None
-                #print(f"Found number of facades: {self.data['Number of facades']}")
 
 
     def extract_terrace(self):
@@ -192,7 +164,6 @@ class PropertyScraper:
                 raw_text2 = value2.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text2)
                 self.data["Terrace Area"] = int(clean_text) if clean_text else None
-                #print(f"Found terrace area: {self.data['Terrace Area']}")
                 
 
     def extract_garden(self):
@@ -211,7 +182,6 @@ class PropertyScraper:
                 raw_text2 = value2.get_text(strip=True)
                 clean_text = re.sub(r'[^\d]', '', raw_text2)
                 self.data["Garden Area"] = int(clean_text) if clean_text else None
-                #print(f"Found garden area: {self.data['Garden Area']}")
 
 
     def extract_state_of_the_building(self):
@@ -223,7 +193,6 @@ class PropertyScraper:
                 value = row.select_one("p")
                 raw_text = value.get_text(strip=True)
                 self.data["State of the building"] = raw_text if raw_text else None
-                #print(f"Found state of the building: {self.data['State of the building']}")
 
 
     def extract_furnished(self):
@@ -248,34 +217,3 @@ class PropertyScraper:
                     raw_text = value.get_text(strip=True)
                     if raw_text.lower() == "yes":
                         self.data["Swimming pool"] = 1
-
-
-
-# url = "https://immovlan.be/en/detail/apartment/for-sale/1081/koekelberg/vbd48962"
-# url = "https://immovlan.be/en/detail/residence/for-sale/1180/ukkel/vbd21625"
-# url = "https://immovlan.be/en/detail/ground-floor/for-sale/1030/schaarbeek/vbd13483"
-# url = "https://immovlan.be/en/detail/apartment/for-sale/1080/sint-jans-molenbeek/vbd65143"
-# url = "https://immovlan.be/en/detail/studio/for-sale/1000/brussels/vbd48521"
-# url = "https://immovlan.be/en/detail/villa/for-sale/1170/watermaal-bosvoorde/vbd82581"
-# url = "https://immovlan.be/en/detail/apartment/for-sale/8670/koksijde/rbv12584"
-# url = "https://immovlan.be/en/detail/apartment/for-sale/8370/blankenberge/rbu86234"
-
-# scraper = PropertyScraper(url)
-# # Print the result
-# print(f"Data locality: {scraper.data['Locality']}")
-# print(f"Data property subtype: {scraper.data['Subtype of property']}")
-# print(f"Data property type: {scraper.data['Type of property']}")
-# print(f"Data price: {scraper.data['Price']}")
-# print(f"Data sale type: {scraper.data['Type of sale']}")
-# print(f"Data number of rooms: {scraper.data['Number of rooms']}")
-# print(f"Data living area: {scraper.data['Living Area']}")
-# print(f"Data surface of the land: {scraper.data['Surface of the land']}")
-# print(f"Data terrace: {scraper.data['Terrace']}")
-# print(f"Data terrace area: {scraper.data['Terrace Area']}")
-# print(f"Data garden: {scraper.data['Garden']}")
-# print(f"Data garden area: {scraper.data['Garden Area']}")
-# print(f"Data number of facades: {scraper.data['Number of facades']}")
-# print(f"Data state of the building: {scraper.data['State of the building']}")   
-# print(f"Data furnished: {scraper.data['Furnished']}")
-# print(f"Data swimming pool: {scraper.data['Swimming pool']}")
-# print(scraper.data)
