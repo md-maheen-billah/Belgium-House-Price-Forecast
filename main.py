@@ -4,10 +4,7 @@ from domain.scraper import PropertyScraper
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
-
-
-def update_ranges():
-    pass
+import pandas as pd
 
 def update_links() -> list[str]:
     links = Links()
@@ -47,3 +44,13 @@ with ThreadPoolExecutor(max_workers=10) as executor:
             data_list.append(data)
 for data in data_list:
     print(data)
+def update_dataset():
+    links = DataManager.links_import()
+    data_list = []
+    for link in links:
+        scraper = PropertyScraper(link)
+        data_list.append(scraper.scrape())
+    DataManager.data_csv_export(data_list)
+
+data = DataManager.data_csv_import()
+print(data)
