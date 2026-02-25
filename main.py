@@ -1,6 +1,7 @@
 from data.manager import DataManager
 from domain.links import Links
 from domain.scraper import PropertyScraper
+from domain.data_cleaner import DataCleaner as dc
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
@@ -43,7 +44,6 @@ def scrape_property(link):
         return None
 
 
-update_dataset()
-
 data = DataManager.data_csv_import()
 print(data)
+dc.check(data)

@@ -5,7 +5,7 @@ import re
 class PriceRanges():
 
     @staticmethod
-    def check_range(minprice: int, maxprice: int, session: requests.Session()) -> int:
+    def check_range(minprice: int, maxprice: int, session: requests.Session) -> int:
         """Returns amount of results"""
         url = (
             "https://immovlan.be/en/real-estate"
