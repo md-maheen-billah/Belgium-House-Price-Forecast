@@ -8,7 +8,7 @@ class Links():
     _LINK = [
         ("https://immovlan.be/en/real-estate?transactiontypes=for-sale&prop"
         "ertytypes=house,apartment&minprice="),
-        "&maxprice=", "&page=", "&sortdirection=ascending&sortby=price&noindex=1"
+        "&maxprice=", "&page=", "&sortdirection=ascending&sortby=price&noindex=1","&islifeannuity=no"
         ]
     _session = requests.Session()
     _headers = {
