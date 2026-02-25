@@ -17,17 +17,22 @@ def update_links() -> list[str]:
     return links_list
 
 def scrape_property(link):
-    scraper = PropertyScraper(link)
-    return scraper.scrape()
+    try:
+        scraper = PropertyScraper(link)
+        return scraper.scrape()
+    except Exception as e:
+        print(f"Failed for {link}: {e}")
+        return None
 
 # links = update_links()
 # DataManager.links_export(links)
 # OR 
 links = DataManager.links_import()
-# links = links[:1000]
+links = links[:10]
 data_list = []
 with ThreadPoolExecutor(max_workers=10) as executor:
     for data in tqdm(executor.map(scrape_property, links), total=len(links)):
-        data_list.append(data)
+        if data is not None:  # skip failed scrapes
+            data_list.append(data)
 for data in data_list:
     print(data)
