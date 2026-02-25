@@ -12,14 +12,17 @@ def update_links() -> list[str]:
     print("SCRAPED: OK")
     return links_list
 
-links = update_links()
-DataManager.links_export(links)
+# links = update_links()
+# DataManager.links_export(links)
 # OR 
-# links = DataManager.links_import()
-# links = links[:50]
-# print(links)
-# data_list = []
-# for link in links:
-#     scraper = PropertyScraper(link)
-#     data_list.append(scraper.scrape())
-# print(data_list)
+links = DataManager.links_import()
+links = links[:10]
+data_list = []
+for link in links:
+    scraper = PropertyScraper(link)
+    data_list.append(scraper.scrape())
+    print("scraping...")
+for data in data_list:
+    print(data)
+
+DataManager.data_csv_export(data)
