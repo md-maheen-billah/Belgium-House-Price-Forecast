@@ -39,6 +39,9 @@ class PropertyScraper:
         delay = random.uniform(1, 2.5)
         time.sleep(delay)
         response = self.session.get(self.url)
+        if "/detail/" not in response.url:
+            print(f"Redirected to search page: {response.url} - skipping {self.url}")
+            return None
         response.raise_for_status()
         self.soup = BeautifulSoup(response.text, 'html.parser')
         self.extract_locality()
