@@ -19,7 +19,7 @@ class DataManager():
         return lines
 
     @staticmethod
-    def data_csv_export(data):
+    def data_csv_export(data: list[dict[srt:str]]):
         """Exporting data list (list of dicts) into ./data/dataset.csv"""
         file_name = "./data/dataset.csv"
         columns = list(data[0].keys())
@@ -31,7 +31,6 @@ class DataManager():
         file.close()
         print("CSV updated.")
 
-    
     @staticmethod
     def data_csv_import() -> pd.DataFrame:
         """
@@ -53,4 +52,3 @@ class DataManager():
         dataset = dataset[dataset["Price"] > 0]
         print("Import: OK")
         return dataset
-        
