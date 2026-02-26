@@ -20,7 +20,6 @@ class DataCleaner():
         Removes 5% of the data from the beginning and 5% from the end.
         Returns the trimmed list.
         """
-        import math
 
         if data is None or data.empty:
             print("No data provided.")
