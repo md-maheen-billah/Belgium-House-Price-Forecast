@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 
 class PriceRanges():
-
+    
     @staticmethod
     def check_range(minprice: int, maxprice: int, session: requests.Session) -> int:
         """Returns amount of results"""

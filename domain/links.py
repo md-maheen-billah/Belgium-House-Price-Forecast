@@ -5,32 +5,34 @@ from domain.scraper import PropertyScraper
 from domain.price_range import PriceRanges as pr
 
 class Links():
+    
     _LINK = [
         ("https://immovlan.be/en/real-estate?transactiontypes=for-sale&prop"
-        "ertytypes=house,apartment&minprice="),
-        "&maxprice=", "&page=", "&sortdirection=ascending&sortby=price&islifeannuity=no&noindex=1"
+        "ertytypes=house,apartment&minprice="), "&maxprice=", "&page=",
+        "&sortdirection=ascending&sortby=price&islifeannuity=no&noindex=1"
         ]
     _session = requests.Session()
     _headers = {
         "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/"
         "537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36")
         }
-    
+
     def __init__(self):
         self._links: list[str] = []
         page = self.get_page(
-            "https://immovlan.be/en/real-estate?transactiontypes=for-sale&property"
-            "types=house,apartment&sortdirection=descending&sortby=price&islifeannuity=no&noindex=1"
+            "https://immovlan.be/en/real-estate?transactiontypes=for-sale&"
+            "propertytypes=house,apartment&sortdirection=descending&sortby"
+            "=price&islifeannuity=no&noindex=1"
         ).content
         search_results = bs(page, "html.parser").find(
             "section", attrs = {"id": "search-results"})
         articles = search_results.find_all("article")
         self._absolute_max = self.get_price(articles[0].get("data-url"))
 
-
     def scrape(self) -> list[str]:
         price_range = {"min": 1, "max": self._absolute_max}
-        results_left = pr.check_range(price_range["min"], price_range["max"], self._session)
+        results_left = pr.check_range(
+            price_range["min"], price_range["max"], self._session)
         print(results_left)
         while results_left > 0:
             print("all goes good")
@@ -56,7 +58,8 @@ class Links():
                 break
             if price_range["min"] == price_range["max"]:
                 break
-            results_left = pr.check_range(price_range["min"], price_range["max"], self._session)
+            results_left = pr.check_range(
+                price_range["min"], price_range["max"], self._session)
             print("------results_left ", results_left)
             print(price_range["min"], price_range["max"])
         self.cleaner()
@@ -95,7 +98,6 @@ class Links():
         data = prop_scraper.scrape()
         return data["Price"]
     
-
     def cleaner(self):
         values = self._links
         result = []

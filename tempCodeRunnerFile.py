@@ -18,14 +18,11 @@ def update_links() -> list[str]:
     print("SCRAPED: OK")
     return links_list
 
-links = update_links()
-
-DataManager.links_export(links)
+# links = update_links()
+# DataManager.links_export(links)
 
 def update_dataset():
     links = DataManager.links_import()
-    # links = links[:400]
-    # links = links[14000:] 
     data_list = []
     with ThreadPoolExecutor(max_workers=10) as executor:
         # Submit all links as futures
@@ -53,7 +50,7 @@ def scrape_property(link):
         print(f"Error scraping {link}: {e}")
         return None
 
-# update_dataset()
+update_dataset()
 data = DataManager.data_csv_import()
 print(data)
 dc.check(data)
