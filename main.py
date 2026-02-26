@@ -8,17 +8,17 @@ import requests
 import pandas as pd
 
 
-# def update_ranges():
-#     pass
+def update_ranges():
+    pass
 
-# def update_links() -> list[str]:
-#     links = Links()
-#     print("SCRAPING...")
-#     links_list = links.scrape()
-#     print("SCRAPED: OK")
-#     return links_list
+def update_links() -> list[str]:
+    links = Links()
+    print("SCRAPING...")
+    links_list = links.scrape()
+    print("SCRAPED: OK")
+    return links_list
 
-# links = update_links()
+links = update_links()
 
 # DataManager.links_export(links)
 
@@ -53,7 +53,7 @@ def scrape_property(link):
         print(f"Error scraping {link}: {e}")
         return None
 
-update_dataset()
+# update_dataset()
 data = DataManager.data_csv_import()
 print(data)
 dc.check(data)
