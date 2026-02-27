@@ -52,4 +52,4 @@ def trim_data():
 # Uncomment to update data:
 # update_links()
 # update_dataset()
-# trim_data()
+trim_data()

@@ -13,8 +13,23 @@ The project was developed as a learning initiative during our Data Science & AI 
 
 ## 🚀 Getting started
 
+This program has no GUI. This program also has no prepared running commands to work with. In future we expect updates with UI so everyone who wants to use our project can use it. You can get project on your PC just by downloading it. Running functions are in **main.py**:
+
+- update_links(): scraping web and updating all links with data.
+- update_dataset(): scraping links from previous function and updating **dataset.csv**.
+- trim_data(): cleaning dataset from not relevant values. Not fully finished.
+
 ## 💡 Usage
+
+Project not completed yet. Watch previous part.
 
 ## 🔮 Incoming updates
 
+- UI update
+- Analisys update
+- Regression update
+- Deployment update
+
 ## 👨‍💻👩‍💻 From creators
+
+Project created for studying and learning AI & Data Science. For any proposes you might send email to owner of repository - [tuesdofsund@gmail.com](mailto:tuesdofsund@gmail.com).
