@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import math
 
 class DataCleaner():
@@ -6,16 +7,56 @@ class DataCleaner():
     @staticmethod
     def check(data: pd.DataFrame):
         print("------DataFrame check------")
-        print("Empty values:")
-        for col in data:
-            print(f"{col}: {data[col].isna().sum()}")
+        print("Records count: ", data.shape[0], sep = '')
+        print(data.head(10))
     
     @staticmethod
     def optimize(data: pd.DataFrame) -> pd.DataFrame:
-        pass
+        data = DataCleaner.trim_edges(data, 0.05)
+        data = data.replace([0, "To demolish", "Under construction", "To restore"], np.nan)
+        condition = data["Garden"] == False
+        data.loc[condition, "Garden Area"] = data.loc[condition, "Garden Area"].fillna(0)
+
+        condition = data["Terrace"] == False
+        data.loc[condition, "Terrace Area"] = data.loc[condition, "Terrace Area"].fillna(0)
+
+        condition = data["Type of property"] == "apartment"
+        sublist = ["Number of rooms"]
+        data.loc[condition, sublist] = data.loc[condition, sublist].fillna(1)
+        sublist = ["Surface of the land", "Terrace Area", "Garden Area"]
+        data.loc[condition, sublist] = data.loc[condition, sublist].fillna(0)
+
+        data = data.drop(["Garden", "Terrace"], axis = 1)
+        data = data.dropna()
+        data = data.rename(columns = {
+            "Locality": "locality",
+            "Type of property": "type",
+            "Subtype of property":"subtype",
+            "Price": "price",
+            "Number of rooms": "rooms",
+            "Living Area": "living_area",
+            "Terrace Area": "terrace",
+            "Garden Area": "garden",
+            "Surface of the land": "land_area",
+            "Number of facades": "facades",
+            "State of the building": "state",
+            "Furnished": "furnished",
+            "Swimming pool": "pool"
+        })
+        data = data.reset_index(drop = True)
+        data = data.replace({
+            "To renovate": 1,
+            "To be renovated": 2,
+            "Normal": 4,
+            "Fully renovated": 6,
+            "Excellent": 7,
+            "New": 8
+        })
+        print("Optimizer: FINISHED")
+        return data
 
     @staticmethod
-    def trim_data_edges(data):
+    def trim_edges(data: pd.DataFrame, persents: float) -> pd.DataFrame:
         """
         Removes 5% of the data from the beginning and 5% from the end.
         Returns the trimmed list.
@@ -26,7 +67,7 @@ class DataCleaner():
             return data
 
         total_rows = len(data)
-        trim_count = math.floor(total_rows * 0.05)
+        trim_count = math.floor(total_rows * persents)
 
         if total_rows <= trim_count * 2:
             print("Dataset too small to trim 5% from both ends.")
