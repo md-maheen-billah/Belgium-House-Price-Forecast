@@ -14,29 +14,19 @@ class DataCleaner():
     def optimize(data: pd.DataFrame) -> pd.DataFrame:
         data = DataCleaner.trim_edges(data, 0.05)
         data = data.replace([0, "To demolish", "Under construction", "To restore"], np.nan)
-        condition = data["Garden"] == False
-        data.loc[condition, "Garden Area"] = data.loc[condition, "Garden Area"].fillna(0)
-
-        condition = data["Terrace"] == False
-        data.loc[condition, "Terrace Area"] = data.loc[condition, "Terrace Area"].fillna(0)
-
         condition = data["Type of property"] == "apartment"
-        sublist = ["Number of rooms"]
-        data.loc[condition, sublist] = data.loc[condition, sublist].fillna(1)
-        sublist = ["Surface of the land", "Terrace Area", "Garden Area"]
+        sublist = ["Surface of the land"]
         data.loc[condition, sublist] = data.loc[condition, sublist].fillna(0)
-
-        data = data.drop(["Garden", "Terrace"], axis = 1)
+        data = data.drop(["Number of rooms", "Garden Area", "Terrace Area"], axis = 1)
         data = data.dropna()
         data = data.rename(columns = {
             "Locality": "locality",
             "Type of property": "type",
             "Subtype of property":"subtype",
             "Price": "price",
-            "Number of rooms": "rooms",
             "Living Area": "living_area",
-            "Terrace Area": "terrace",
-            "Garden Area": "garden",
+            "Terrace": "terrace",
+            "Garden": "garden",
             "Surface of the land": "land_area",
             "Number of facades": "facades",
             "State of the building": "state",
