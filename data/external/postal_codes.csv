@@ -1,5 +1,5 @@
 region,code,municipality
-Belgium,3511,Hasselt
+Flemish Region,3511,Hasselt
 Flemish Region,3520,Zonhoven
 Walloon Region,4141,Sprimont
 Walloon Region,4420,Saint-Nicolas
@@ -27,9 +27,9 @@ Flemish Region,2250,Olen
 Flemish Region,2310,Rijkevorsel
 Flemish Region,3080,Tervuren
 Flemish Region,3471,Kortenaken
-Belgium,3501,Hasselt
+Flemish Region,3501,Hasselt
 Flemish Region,3717,Herstappe
-Belgium,3722,Hasselt
+Flemish Region,3722,Hasselt
 Flemish Region,3800,Saint-Trond
 Flemish Region,3910,Pelt
 Walloon Region,4020,Liège
@@ -65,10 +65,10 @@ Walloon Region,6811,Chiny
 Walloon Region,7822,Ath
 Walloon Region,7972,Beloeil
 Flemish Region,8972,Poperinge
-Belgium,9080,Lochristi
-Belgium,9130,Beveren-Kruibeke-Zwijndrecht
+Flemish Region,9080,Lochristi
+Flemish Region,9130,Beveren-Kruibeke-Zwijndrecht
 Flemish Region,9681,Maarkedal
-Belgium,9840,Nazareth-De Pinte
+Flemish Region,9840,Nazareth-De Pinte
 Flemish Region,1650,Beersel
 Flemish Region,1852,Grimbergen
 Flemish Region,3212,Lubbeek
@@ -122,7 +122,7 @@ Flemish Region,1982,Zemst
 Flemish Region,3294,Diest
 Flemish Region,3670,Oudsbergen
 Flemish Region,3680,Maaseik
-Belgium,3746,Bilzen-Hoeselt
+Flemish Region,3746,Bilzen-Hoeselt
 Walloon Region,6211,Les Bons Villers
 Walloon Region,6250,Aiseau-Presles
 Walloon Region,4161,Anthisnes
@@ -143,7 +143,7 @@ Walloon Region,5542,Hastière
 Flemish Region,8210,Zedelgem
 Flemish Region,8600,Dixmude
 Flemish Region,9041,Gand
-Belgium,9180,Lokeren
+Flemish Region,9180,Lokeren
 Flemish Region,9400,Ninove
 Walloon Region,6500,Beaumont
 Walloon Region,6640,Vaux-sur-Sûre
@@ -212,7 +212,7 @@ Walloon Region,7502,Tournai
 Walloon Region,6663,Houffalize
 Walloon Region,7804,Ath
 Walloon Region,6673,Gouvy
-Belgium,6688,Bastogne
+Walloon Region,6688,Bastogne
 Walloon Region,6747,Saint-Léger
 Flemish Region,8880,Ledegem
 Walloon Region,6831,Bouillon
@@ -267,7 +267,7 @@ Brussels-Capital Region,1090,Jette
 Walloon Region,1370,Jodoigne
 Walloon Region,1428,Braine-l’Alleud
 Walloon Region,1495,Villers-la-Ville
-Belgium,1570,Pajottegem
+Flemish Region,1570,Pajottegem
 Flemish Region,1831,Machelen
 Flemish Region,1981,Zemst
 Flemish Region,2270,Herenthout
@@ -286,8 +286,8 @@ Flemish Region,2531,Boechout
 Flemish Region,3110,Rotselaar
 Flemish Region,3404,Landen
 Flemish Region,3550,Heusden-Zolder
-Belgium,3721,Hasselt
-Belgium,3724,Hasselt
+Flemish Region,3721,Hasselt
+Flemish Region,3724,Hasselt
 Walloon Region,4051,Chaudfontaine
 Walloon Region,4130,Esneux
 Walloon Region,4190,Ferrières
@@ -310,13 +310,13 @@ Walloon Region,7382,Quiévrain
 Walloon Region,7784,Comines-Warneton
 Walloon Region,7866,Lessines
 Flemish Region,8550,Zwevegem
-Belgium,8755,Wingene
+Flemish Region,8755,Wingene
 Flemish Region,8810,Lichtervelde
 Flemish Region,8950,Heuvelland
 Flemish Region,8953,Heuvelland
 Flemish Region,9100,Saint-Nicolas
 Flemish Region,9770,Kruisem
-Belgium,9820,Merelbeke-Melle
+Flemish Region,9820,Merelbeke-Melle
 Flemish Region,9831,Sint-Martens-Latem
 Flemish Region,9992,Maldegem
 Brussels-Capital Region,1050,Ixelles
@@ -384,7 +384,7 @@ Flemish Region,3530,Houthalen-Helchteren
 Flemish Region,3640,Kinrooi
 Flemish Region,3650,Dilsen-Stokkem
 Flemish Region,3665,As
-Belgium,3732,Bilzen-Hoeselt
+Flemish Region,3732,Bilzen-Hoeselt
 Flemish Region,3793,Fourons
 Walloon Region,4217,Héron
 Walloon Region,4347,Fexhe-le-Haut-Clocher
@@ -410,7 +410,7 @@ Flemish Region,3201,Aarschot
 Flemish Region,3211,Lubbeek
 Flemish Region,3380,Glabbeek
 Flemish Region,3472,Kortenaken
-Belgium,3840,Tongeren-Borgloon
+Flemish Region,3840,Tongeren-Borgloon
 Walloon Region,4170,Comblain-au-Pont
 Walloon Region,4351,Remicourt
 Walloon Region,4480,Engis
@@ -485,7 +485,7 @@ Flemish Region,3792,Fourons
 Flemish Region,9910,Aalter
 Walloon Region,6900,Marche-en-Famenne
 Flemish Region,8431,Middelkerke
-Belgium,8700,Tielt
+Flemish Region,8700,Tielt
 Flemish Region,8770,Ingelmunster
 Flemish Region,8851,Ardooie
 Flemish Region,8870,Izegem
@@ -495,8 +495,8 @@ Flemish Region,2910,Essen
 Flemish Region,3071,Kortenberg
 Flemish Region,3210,Lubbeek
 Flemish Region,3300,Tirlemont
-Belgium,3720,Hasselt
-Belgium,3980,Tessenderlo-Ham
+Flemish Region,3720,Hasselt
+Flemish Region,3980,Tessenderlo-Ham
 Walloon Region,4690,Bassenge
 Walloon Region,4771,Amblève
 Walloon Region,4845,Jalhay
@@ -513,7 +513,7 @@ Flemish Region,3384,Glabbeek
 Flemish Region,3401,Landen
 Flemish Region,3450,Geetbets
 Flemish Region,3600,Genk
-Belgium,3723,Hasselt
+Flemish Region,3723,Hasselt
 Walloon Region,4000,Liège
 Walloon Region,4050,Chaudfontaine
 Walloon Region,4121,Neupré
@@ -527,7 +527,7 @@ Walloon Region,5374,Havelange
 Brussels-Capital Region,1082,Berchem-Sainte-Agathe
 Walloon Region,1320,Beauvechain
 Walloon Region,1410,Waterloo
-Belgium,1540,Pajottegem
+Flemish Region,1540,Pajottegem
 Flemish Region,1560,Hoeilaart
 Flemish Region,1630,Linkebeek
 Walloon Region,6000,Charleroi
@@ -539,7 +539,7 @@ Flemish Region,2580,Putte
 Flemish Region,3130,Begijnendijk
 Walloon Region,6780,Messancy
 Flemish Region,3668,As
-Belgium,3742,Bilzen-Hoeselt
+Flemish Region,3742,Bilzen-Hoeselt
 Walloon Region,6941,Durbuy
 Walloon Region,7021,Mons
 Walloon Region,7031,Mons
@@ -574,7 +574,7 @@ Brussels-Capital Region,1081,Koekelberg
 Flemish Region,2990,Wuustwezel
 Flemish Region,3010,Louvain
 Flemish Region,3381,Glabbeek
-Belgium,3500,Hasselt
+Flemish Region,3500,Hasselt
 Walloon Region,4102,Seraing
 Walloon Region,4430,Ans
 Flemish Region,2530,Boechout
@@ -607,7 +607,7 @@ Flemish Region,8582,Avelgem
 Flemish Region,8790,Waregem
 Walloon Region,6769,Meix-devant-Virton
 Flemish Region,9040,Gand
-Belgium,9120,Beveren-Kruibeke-Zwijndrecht
+Flemish Region,9120,Beveren-Kruibeke-Zwijndrecht
 Flemish Region,9220,Hamme
 Walloon Region,6834,Bouillon
 Flemish Region,9750,Kruisem
@@ -718,7 +718,7 @@ Walloon Region,7880,Flobecq
 Flemish Region,8930,Menin
 Flemish Region,3473,Kortenaken
 Flemish Region,9051,Gand
-Belgium,9090,Merelbeke-Melle
+Flemish Region,9090,Merelbeke-Melle
 Flemish Region,9620,Zottegem
 Flemish Region,9870,Zulte
 Walloon Region,6010,Charleroi
@@ -770,7 +770,7 @@ Walloon Region,5503,Dinant
 Walloon Region,5520,Onhaye
 Walloon Region,5563,Houyet
 Flemish Region,8501,Courtrai
-Belgium,8760,Tielt
+Flemish Region,8760,Tielt
 Flemish Region,1742,Ternat
 Flemish Region,3950,Bocholt
 Walloon Region,4710,Lontzen
@@ -782,7 +782,7 @@ Walloon Region,6533,Thuin
 Walloon Region,6536,Thuin
 Walloon Region,6660,Houffalize
 Walloon Region,6666,Houffalize
-Belgium,6687,Bastogne
+Walloon Region,6687,Bastogne
 Walloon Region,6791,Aubange
 Walloon Region,6792,Aubange
 Walloon Region,6952,Nassogne
@@ -793,7 +793,7 @@ Flemish Region,9980,Sint-Laureins
 Brussels-Capital Region,1070,Anderlecht
 Walloon Region,1404,Nivelles
 Walloon Region,1457,Walhain
-Belgium,1541,Pajottegem
+Flemish Region,1541,Pajottegem
 Walloon Region,5300,Andenne
 Flemish Region,2970,Schilde
 Flemish Region,3140,Keerbergen
@@ -824,7 +824,7 @@ Walloon Region,6001,Charleroi
 Walloon Region,6020,Charleroi
 Walloon Region,6542,Lobbes
 Walloon Region,6567,Merbes-le-Château
-Belgium,6686,Bastogne
+Walloon Region,6686,Bastogne
 Walloon Region,6810,Chiny
 Walloon Region,6812,Chiny
 Walloon Region,6836,Bouillon
@@ -897,14 +897,14 @@ Flemish Region,3191,Boortmeerbeek
 Flemish Region,2490,Balen
 Flemish Region,3461,Bekkevoort
 Flemish Region,2845,Niel
-Belgium,3730,Bilzen-Hoeselt
+Flemish Region,3730,Bilzen-Hoeselt
 Flemish Region,2870,Puurs-Sint-Amands
 Flemish Region,3831,Wellen
 Flemish Region,3271,Montaigu-Zichem
 Flemish Region,3870,Heers
 Flemish Region,3350,Linter
 Flemish Region,3940,Hechtel-Eksel
-Belgium,3510,Hasselt
+Flemish Region,3510,Hasselt
 Flemish Region,3960,Bree
 Flemish Region,3582,Beringen
 Walloon Region,4560,Clavier
@@ -937,7 +937,7 @@ Flemish Region,8551,Zwevegem
 Walloon Region,1474,Genappe
 Flemish Region,8554,Zwevegem
 Flemish Region,1674,Pepingen
-Belgium,2070,Beveren-Kruibeke-Zwijndrecht
+Flemish Region,2070,Beveren-Kruibeke-Zwijndrecht
 Flemish Region,8587,Espierres-Helchin
 Flemish Region,8791,Waregem
 Flemish Region,9260,Wichelen
@@ -946,7 +946,7 @@ Flemish Region,2812,Malines
 Flemish Region,2880,Bornem
 Flemish Region,2960,Brecht
 Walloon Region,4317,Faimes
-Belgium,3700,Tongeren-Borgloon
+Flemish Region,3700,Tongeren-Borgloon
 Flemish Region,9860,Oosterzele
 Walloon Region,4783,Saint-Vith
 Walloon Region,4784,Saint-Vith
@@ -959,7 +959,7 @@ Walloon Region,6210,Les Bons Villers
 Walloon Region,6223,Fleurus
 Walloon Region,6530,Thuin
 Flemish Region,9700,Audenarde
-Belgium,9810,Nazareth-De Pinte
+Flemish Region,9810,Nazareth-De Pinte
 Walloon Region,6700,Arlon
 Walloon Region,6740,Etalle
 Walloon Region,6761,Virton
@@ -970,7 +970,7 @@ Flemish Region,8573,Anzegem
 Flemish Region,8691,Alveringem
 Flemish Region,8904,Ypres
 Flemish Region,8908,Ypres
-Belgium,9150,Beveren-Kruibeke-Zwijndrecht
+Flemish Region,9150,Beveren-Kruibeke-Zwijndrecht
 Flemish Region,9320,Alost
 Flemish Region,9667,Horebeke
 Flemish Region,8540,Deerlijk
@@ -995,7 +995,7 @@ Flemish Region,8380,Bruges
 Walloon Region,6140,Fontaine-l’Evêque
 Flemish Region,8432,Middelkerke
 Flemish Region,8647,Lo-Reninge
-Belgium,8750,Wingene
+Flemish Region,8750,Wingene
 Flemish Region,9600,Renaix
 Walloon Region,1380,Lasne
 Walloon Region,1472,Genappe
@@ -1007,7 +1007,7 @@ Brussels-Capital Region,1200,Woluwe-Saint-Lambert
 Walloon Region,1450,Chastre
 Flemish Region,1673,Pepingen
 Flemish Region,1880,Kapelle-op-den-Bos
-Belgium,1755,Pajottegem
+Flemish Region,1755,Pajottegem
 Flemish Region,1930,Zaventem
 Walloon Region,4851,Plombières
 Walloon Region,5363,Hamois
@@ -1016,18 +1016,18 @@ Flemish Region,8211,Zedelgem
 Flemish Region,8553,Zwevegem
 Flemish Region,8572,Anzegem
 Flemish Region,8720,Dentergem
-Belgium,9185,Lochristi
+Flemish Region,9185,Lochristi
 Brussels-Capital Region,1140,Evere
 Brussels-Capital Region,1150,Woluwe-Saint-Pierre
 Flemish Region,1702,Dilbeek
 Walloon Region,5500,Dinant
 Walloon Region,5504,Dinant
 Flemish Region,3390,Tielt-Winge
-Belgium,3512,Hasselt
+Flemish Region,3512,Hasselt
 Walloon Region,5570,Beauraing
 Flemish Region,3790,Fourons
 Flemish Region,3900,Pelt
-Belgium,3945,Tessenderlo-Ham
+Flemish Region,3945,Tessenderlo-Ham
 Walloon Region,4042,Herstal
 Walloon Region,6723,Habay
 Walloon Region,4557,Tinlot
@@ -1090,7 +1090,7 @@ Walloon Region,5501,Dinant
 Walloon Region,5660,Couvin
 Walloon Region,6183,Courcelles
 Walloon Region,6463,Chimay
-Belgium,6600,Bastogne
+Walloon Region,6600,Bastogne
 Walloon Region,6674,Gouvy
 Walloon Region,6717,Attert
 Walloon Region,4683,Oupeye
@@ -1100,7 +1100,7 @@ Flemish Region,8780,Oostrozebeke
 Flemish Region,8800,Roulers
 Flemish Region,8860,Lendelede
 Flemish Region,9000,Gand
-Belgium,9160,Lokeren
+Flemish Region,9160,Lokeren
 Flemish Region,9290,Berlare
 Flemish Region,9932,Lievegem
 Flemish Region,9950,Lievegem
@@ -1133,7 +1133,7 @@ Flemish Region,3321,Hoegaarden
 Flemish Region,3798,Fourons
 Walloon Region,4171,Comblain-au-Pont
 Walloon Region,4550,Nandrin
-Belgium,3740,Bilzen-Hoeselt
+Flemish Region,3740,Bilzen-Hoeselt
 Flemish Region,3770,Riemst
 Walloon Region,4452,Juprelle
 Walloon Region,7610,Rumes

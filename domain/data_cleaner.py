@@ -34,7 +34,6 @@ class DataCleaner():
             "Furnished": "furnished",
             "Swimming pool": "pool"
         })
-        data = data.reset_index(drop = True)
         data = data.replace({
             "To renovate": 1,
             "To be renovated": 2,
@@ -47,9 +46,10 @@ class DataCleaner():
             (data.living_area != 1) &
             (data.living_area != data.land_area)
         ]
-        code_list = pd.read_csv("./data/postal_codes.csv")
+        data = data.reset_index(drop = True)
+        code_list = pd.read_csv("./data/external/postal_codes.csv")
         code_list.code = code_list.code.astype(str)
-        with open("./data/links.txt", "r", encoding="utf-8") as f:
+        with open("./data/raw/links.txt", "r", encoding="utf-8") as f:
             links = f.read()
             f.close()
         links = links.split('\n')
