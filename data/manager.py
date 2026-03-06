@@ -7,7 +7,7 @@ class DataManager():
     @staticmethod
     def links_export(links: list[str]):
         """Exporting links to .txt"""
-        with open("./data/links.txt", "w") as file:
+        with open("./data/raw/links.txt", "w") as file:
             for link in links:
                 file.write(f"{link}\n")
         print("links.txt updated.")
@@ -15,15 +15,15 @@ class DataManager():
     @staticmethod
     def links_import() -> list[str]:
         """Importing links from .txt"""
-        with open("./data/links.txt", "r") as file:
+        with open("./data/raw/links.txt", "r") as file:
             lines = [line.strip() for line in file if line.strip()]
         print("Links import: OK")
         return lines
 
     @staticmethod
     def data_csv_export(data: list[dict[str: any]], filename: str):
-        """Exporting data list (list of dicts) into ./data/dataset.csv"""
-        file_name = f"./data/{filename}.csv"
+        """Exporting data list (list of dicts) into .csv"""
+        file_name = f"./data/raw/{filename}.csv"
         columns = list(data[0].keys())
         file = open(file_name, "w", newline="", encoding="utf-8")
         writer = csv.DictWriter(file, columns)
@@ -46,13 +46,13 @@ class DataManager():
     @staticmethod
     def raw_data_csv_import() -> pd.DataFrame:
         """
-        - Importing data from "./data/raw_dataset.csv".
+        - Importing data from "./data/raw/raw_dataset.csv".
         - Converting all values to its' types.
         - Clearnig set from priceless records.
 
         Return: pandas.DataFrame - data from file.
         """
-        dataset = pd.read_csv("./data/raw_dataset.csv", na_values = ["None", "", "unknown"])
+        dataset = pd.read_csv("./data/raw/raw_dataset.csv", na_values = ["None", "", "unknown"])
         strings = ["Locality", "Type of property", "Subtype of property", 
         "State of the building"]
         numbers = ["Price", "Number of rooms", "Living Area", "Terrace Area",

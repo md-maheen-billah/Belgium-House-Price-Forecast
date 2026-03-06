@@ -1,3 +1,4 @@
+from unidecode import unidecode
 import pandas as pd
 import numpy as np
 import math
@@ -33,15 +34,40 @@ class DataCleaner():
             "Furnished": "furnished",
             "Swimming pool": "pool"
         })
-        data = data.reset_index(drop = True)
         data = data.replace({
-            "To renovate": 1,
+            "To renovate": 2,
             "To be renovated": 2,
             "Normal": 4,
             "Fully renovated": 6,
             "Excellent": 7,
             "New": 8
         })
+        data = data[
+            (data.living_area != 1) &
+            (data.living_area != data.land_area)
+        ]
+        data = data.reset_index(drop = True)
+        code_list = pd.read_csv("./data/external/postal_codes.csv")
+        code_list.code = code_list.code.astype(str)
+        with open("./data/raw/links.txt", "r", encoding="utf-8") as f:
+            links = f.read()
+            f.close()
+        links = links.split('\n')
+        codes = []
+        names = []
+        for line in links:
+            codes.append(line.split("/")[7])
+            names.append(line.split("/")[8])
+        raw_data = {"code": codes, "locality": names}
+        df = pd.DataFrame(raw_data)
+        df = df.drop_duplicates("locality").reset_index(drop = True)
+        data.locality = data.locality.apply(
+            lambda x: 
+            unidecode(x.lower().replace(" ", "-").replace("'", "-")))
+        data.insert(0, "index", data.index)
+        data = data.merge(df, how="left", on="locality")
+        data = data.merge(code_list, how="left", on="code")
+        data = data.drop(["locality", "code"], axis = 1)
         print("Optimizer: FINISHED")
         return data
 
@@ -64,7 +90,7 @@ class DataCleaner():
             print("Dataset too small to trim values from both ends.")
             return data
 
-        trimmed_data = data.iloc[trim_start : total_rows - trim_end]
+        trimmed_data = data.iloc[trim_start:total_rows-trim_end, :]
 
         print(f"Trimmed {trim_start + trim_end} rows.")
         return trimmed_data
