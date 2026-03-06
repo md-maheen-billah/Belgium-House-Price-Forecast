@@ -1,3 +1,5 @@
 .vscode
+.ipynb_checkpoints
 data/__pycache__
 domain/__pycache__
+domain/analysis/.ipynb_checkpoints
